@@ -36,13 +36,17 @@
 
   <textarea id="comment" placeholder="Например: на 2 часа"></textarea><button class="send" onclick="sendWhatsApp()">Отправить заявку</button>
 
-  <hr style="margin:20px 0; opacity:0.3;"><button class="accept" onclick="accept()">Принять заявку</button> <button class="reject" onclick="reject()">Отказать</button>
+<label>Оплата</label> <select id="pay"> <option>Kaspi</option> <option>Наличные</option> </select>
 
-  <div class="note">
-    После нажатия кнопки откроется WhatsApp
-  </div>
+<label>Комментарий</label>
+
+  <textarea id="comment" placeholder="Например: на 2 часа"></textarea>  <hr style="margin:20px 0; opacity:0.3;">  <div style="text-align:center; font-weight:bold;">Для администратора</div>
+  <button class="accept" onclick="accept()">Свободно</button>
+  <button class="reject" onclick="reject()">Занято</button><button style="margin-top:20px; background:#555; color:#fff;" onclick="window.close()">Выйти</button>
+
+  <div class="note">Кнопки ниже нажимает администратор после заявки</div>
 </div><script>
-  const phone = "77000000000"; // ЗАМЕНИ на номер клуба
+  const phone = "77783389306"; // ЗАМЕНИ на номер клуба
 
   function sendWhatsApp() {
     let text = `БРОНЬ PS5%0A` +
