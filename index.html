@@ -16,56 +16,41 @@
     .send { background:#25D366; color:#000; font-weight:bold; }
     .accept { background:#4CAF50; color:#000; }
     .reject { background:#F44336; color:#000; }
-    .note { font-size:14px; opacity:0.8; margin-top:10px; }
+    .note { font-size:14px; opacity:0.8; margin-top:10px; text-align:center; }
   </style>
 </head>
 <body><div class="card">
-  <h1>Бронирование PS5</h1><label>Имя</label> <input id="name" placeholder="Ваше имя">
+  <h1>Бронирование PS5</h1><label>Время</label> <input id="time" type="time">
 
-<label>Дата</label> <input id="date" type="date">
-
-<label>Время</label> <input id="time" type="time">
-
-<label>Зона</label> <select id="zone"> <option value="Общий зал">Общий зал</option> <option value="VIP">VIP</option> </select>
-
-<label>Статус места</label> <select id="status"> <option value="Свободно">Свободно ✅</option> <option value="Занято">Занято ❌</option> </select>
-
-<label>Способ оплаты</label> <select id="pay"> <option>Kaspi</option> <option>Наличные</option> </select>
-
-<label>Комментарий</label>
-
-  <textarea id="comment" placeholder="Например: на 2 часа"></textarea><button class="send" onclick="sendWhatsApp()">Отправить заявку</button>
+<label>Зал</label> <select id="zone"> <option>Общий зал</option> <option>VIP</option> </select>
 
 <label>Оплата</label> <select id="pay"> <option>Kaspi</option> <option>Наличные</option> </select>
 
 <label>Комментарий</label>
 
-  <textarea id="comment" placeholder="Например: на 2 часа"></textarea>  <hr style="margin:20px 0; opacity:0.3;">  <div style="text-align:center; font-weight:bold;">Для администратора</div>
-  <button class="accept" onclick="accept()">Свободно</button>
-  <button class="reject" onclick="reject()">Занято</button><button style="margin-top:20px; background:#555; color:#fff;" onclick="window.close()">Выйти</button>
+  <textarea id="comment" placeholder="Например: на 2 часа"></textarea><button class="send" onclick="sendWhatsApp()">Отправить заявку</button>
 
-  <div class="note">Кнопки ниже нажимает администратор после заявки</div>
+  <div class="note">После отправки заявки администратор получает кнопки "Свободно" / "Занято" в WhatsApp</div>
 </div><script>
-  const phone = "77783389306"; // ЗАМЕНИ на номер клуба
+  const phone = "77000000000"; // ЗАМЕНИ на номер клуба
 
   function sendWhatsApp() {
     let text = `БРОНЬ PS5%0A` +
-      `Имя: ${name.value}%0A` +
-      `Дата: ${date.value}%0A` +
       `Время: ${time.value}%0A` +
-      `Зона: ${zone.value}%0A` +
+      `Зал: ${zone.value}%0A` +
       `Оплата: ${pay.value}%0A` +
-      `Комментарий: ${comment.value}`;
+      `Комментарий: ${comment.value}%0A` +
+      `%0AПринять или отказать:`;
 
     window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
   }
 
   function accept() {
-    window.open(`https://wa.me/${phone}?text=Ваша бронь ПРИНЯТА ✅`, '_blank');
+    window.open(`https://wa.me/${phone}?text=Бронь ПРИНЯТА ✅`, '_blank');
   }
 
   function reject() {
-    window.open(`https://wa.me/${phone}?text=К сожалению, бронь ОТКЛОНЕНА ❌`, '_blank');
+    window.open(`https://wa.me/${phone}?text=Бронь ОТКЛОНЕНА ❌`, '_blank');
   }
 </script></body>
 </html>
