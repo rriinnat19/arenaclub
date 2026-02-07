@@ -35,31 +35,28 @@
     .btn-send { background:#25D366; color:#000; }
     .btn-exit { background:#444; color:#fff; }
     .prices { margin-top:10px; font-size:15px; }
-    .prices div { margin:4px 0; }
-    .photos img {
-      width:100%; border-radius:12px; margin-top:10px;
-    }
-    .info { text-align:center; font-size:13px; opacity:0.75; margin-top:14px; }
-    .social { text-align:center; margin-top:16px; }
-    .social a { color:#fff; text-decoration:none; font-size:14px; }
-    .qr { text-align:center; margin-top:18px; }
-    .qr img { width:160px; border-radius:12px; }
+    .prices div { margin:4px 0; }.info { text-align:center; font-size:13px; opacity:0.75; margin-top:14px; }
+.social { text-align:center; margin-top:16px; }
+.social a { color:#fff; text-decoration:none; font-size:14px; }
+.qr { text-align:center; margin-top:18px; }
+.qr img { width:160px; border-radius:12px; }
+
   </style>
 </head>
 <body><div class="container">
-  <h1>Бронирование PS5</h1>  <h2>Цены</h2>
+  <h1 data-t="title">Бронирование PS5</h1>  <h2 data-t="prices">Цены</h2>
   <div class="prices">
     <div>🎮 Общий зал — <b>900 ₸ / час</b></div>
     <div>👑 VIP — <b>1500 ₸ / час</b></div>
-  </div>  <h2>Оставить заявку</h2>
-  <label>Время игры</label>
-  <input id="time" type="time"><label>Зал</label> <select id="zone"> <option value="Общий зал">Общий зал</option> <option value="VIP">VIP</option> </select>
+  </div>  <h2 data-t="form">Оставить заявку</h2>
+  <label data-t="time">Время игры</label>
+  <input id="time" type="time"><label data-t="hall">Зал</label> <select id="zone"> <option value="Общий зал">Общий зал</option> <option value="VIP">VIP</option> </select>
 
-<label>Оплата</label> <select id="pay"> <option value="Kaspi">Kaspi</option> <option value="Наличные">Наличные</option> </select>
+<label data-t="pay">Оплата</label> <select id="pay"> <option value="Kaspi">Kaspi</option> <option value="Наличные">Наличные</option> </select>
 
-<label>Комментарий</label>
+<label data-t="comment">Комментарий</label>
 
-  <textarea id="comment" placeholder="Например: на 2 часа"></textarea><button class="btn btn-send" onclick="sendWhatsApp()">Отправить заявку</button> <button class="btn btn-exit" onclick="window.close()">Выйти</button>
+  <textarea id="comment" placeholder="Например: на 2 часа"></textarea><button class="btn btn-send" onclick="sendWhatsApp()"><span data-t="submit">Отправить заявку</span></button> <button class="btn btn-exit" onclick="window.close()"><span data-t="exit">Выйти</span></button>
 
   <div class="info">Ответ придёт в WhatsApp</div>  <div class="social">
     <a href="https://instagram.com/zhlgsv.r" target="_blank">📷 Instagram: @zhlgsv.r</a>
@@ -98,23 +95,25 @@
 const texts = {
   ru: {
     title: 'Бронирование PS5',
-    submit: 'Подать заявку',
+    prices: 'Цены',
+    form: 'Оставить заявку',
+    submit: 'Отправить заявку',
     exit: 'Выйти',
-    time: 'Время',
+    time: 'Время игры',
     hall: 'Зал',
     pay: 'Оплата',
-    comment: 'Комментарий',
-    prices: 'Цены'
+    comment: 'Комментарий'
   },
   kz: {
     title: 'PS5 брондау',
+    prices: 'Бағалар',
+    form: 'Өтінім қалдыру',
     submit: 'Өтінім жіберу',
     exit: 'Шығу',
-    time: 'Уақыты',
+    time: 'Ойын уақыты',
     hall: 'Зал',
     pay: 'Төлем',
-    comment: 'Пікір',
-    prices: 'Бағалар'
+    comment: 'Пікір'
   }
 };
 
@@ -124,4 +123,4 @@ function setLang(lang){
   });
 }
 </script></body>
-</html>
+  </html>
