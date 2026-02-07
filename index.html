@@ -61,15 +61,14 @@
   <div class="info">Ответ придёт в WhatsApp</div>  <div class="social">
     <a href="https://instagram.com/zhlgsv.r" target="_blank">📷 Instagram: @zhlgsv.r</a>
   </div>  <div class="qr">
-    <div style="margin-bottom:6px;">QR для бронирования PS5</div>
+    <div data-t="qr">QR для бронирования PS5</div>
     <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://rriinnat19.github.io/arenaclub/" alt="QR бронирования">
   </div>
     <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://rriinnat19.github.io/arenaclub/" alt="QR (бронь)">
   </div>  <div class="info" style="margin-top:18px;">
-    📍 <b>Адрес:</b> г. Рудный, ул. Ленина, 20<br>
-    🕒 <b>Режим работы:</b><br>
-    каждый день с 14–15 часов до 1–2 ночи<br>
-    (до последнего клиента!)
+    📍 <b data-t="address">Адрес:</b> <span data-t="address_val">г. Рудный, ул. Ленина, 20</span><br>
+    🕒 <b data-t="hours">Режим работы:</b><br>
+    <span data-t="hours_val">каждый день с 14–15 часов до 1–2 ночи (до последнего клиента!)</span>
   </div>
     <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://rriinnat19.github.io/arenaclub/" alt="QR (бронь)">
   </div>
@@ -104,7 +103,12 @@ const texts = {
     time: 'Время игры',
     hall: 'Зал',
     pay: 'Оплата',
-    comment: 'Комментарий'
+    comment: 'Комментарий',
+    qr: 'QR для бронирования PS5',
+    address: 'Адрес:',
+    address_val: 'г. Рудный, ул. Ленина, 20',
+    hours: 'Режим работы:',
+    hours_val: 'каждый день с 14–15 часов до 1–2 ночи (до последнего клиента!)'
   },
   kz: {
     title: 'PS5 брондау',
@@ -115,7 +119,12 @@ const texts = {
     time: 'Ойын уақыты',
     hall: 'Зал',
     pay: 'Төлем',
-    comment: 'Пікір'
+    comment: 'Пікір',
+    qr: 'PS5 брондауға арналған QR',
+    address: 'Мекенжай:',
+    address_val: 'Рудный қ., Ленин к-сі, 20',
+    hours: 'Жұмыс уақыты:',
+    hours_val: 'күн сайын 14–15-тен 1–2 түнге дейін (соңғы клиентке дейін)'
   }
 };
 
@@ -125,4 +134,4 @@ function setLang(lang){
   });
 }
 </script></body>
-  </html>
+</html>
