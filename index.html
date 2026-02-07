@@ -1,56 +1,124 @@
 <!DOCTYPE html><html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>PS5 Club Arena — Бронирование</title>
+  <title>Arena Club PS5 — Бронирование</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { font-family: Arial, sans-serif; background:#111; color:#fff; margin:0; padding:20px; }
-    .card { max-width:500px; margin:auto; background:#1c1c1c; padding:20px; border-radius:12px; }
-    h1 { text-align:center; }
-    label { display:block; margin-top:12px; }
-    input, select, textarea, button {
-      width:100%; padding:10px; margin-top:6px;
-      border-radius:8px; border:none; font-size:16px;
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
     }
-    button { margin-top:15px; cursor:pointer; }
-    .send { background:#25D366; color:#000; font-weight:bold; }
-    .accept { background:#4CAF50; color:#000; }
-    .reject { background:#F44336; color:#000; }
-    .note { font-size:14px; opacity:0.8; margin-top:10px; text-align:center; }
+    .container {
+      max-width: 420px;
+      margin: 30px auto;
+      background: #121212;
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.6);
+    }
+    h1 { text-align:center; font-size:22px; margin-bottom:10px; }
+    h2 { font-size:18px; margin-top:22px; }
+    label { display:block; margin-top:12px; font-size:14px; opacity:0.9; }
+    input, select, textarea {
+      width:100%; margin-top:6px; padding:10px;
+      border-radius:10px; border:none; font-size:15px;
+    }
+    textarea { resize:none; height:70px; }
+    .btn {
+      width:100%; padding:12px; margin-top:16px;
+      border-radius:12px; border:none; font-size:16px;
+      font-weight:bold; cursor:pointer;
+    }
+    .btn-send { background:#25D366; color:#000; }
+    .btn-exit { background:#444; color:#fff; }
+    .prices { margin-top:10px; font-size:15px; }
+    .prices div { margin:4px 0; }
+    .photos img {
+      width:100%; border-radius:12px; margin-top:10px;
+    }
+    .info { text-align:center; font-size:13px; opacity:0.75; margin-top:14px; }
+    .social { text-align:center; margin-top:16px; }
+    .social a { color:#fff; text-decoration:none; font-size:14px; }
+    .qr { text-align:center; margin-top:18px; }
+    .qr img { width:160px; border-radius:12px; }
   </style>
 </head>
-<body><div class="card">
-  <h1>Бронирование PS5</h1><label>Время</label> <input id="time" type="time">
+<body><div class="container">
+  <h1>Бронирование PS5</h1>  <h2>Цены</h2>
+  <div class="prices">
+    <div>🎮 Общий зал — <b>900 ₸ / час</b></div>
+    <div>👑 VIP — <b>1500 ₸ / час</b></div>
+  </div>  <h2>Фото зала</h2>
+  <div class="photos">
+    <img src="https://via.placeholder.com/400x220?text=Общий+зал" alt="Общий зал">
+    <img src="https://via.placeholder.com/400x220?text=VIP+зал" alt="VIP зал">
+  </div>  <h2>Оставить заявку</h2>
+  <label>Время игры</label>
+  <input id="time" type="time"><label>Зал</label> <select id="zone"> <option value="Общий зал">Общий зал</option> <option value="VIP">VIP</option> </select>
 
-<label>Зал</label> <select id="zone"> <option>Общий зал</option> <option>VIP</option> </select>
-
-<label>Оплата</label> <select id="pay"> <option>Kaspi</option> <option>Наличные</option> </select>
+<label>Оплата</label> <select id="pay"> <option value="Kaspi">Kaspi</option> <option value="Наличные">Наличные</option> </select>
 
 <label>Комментарий</label>
 
-  <textarea id="comment" placeholder="Например: на 2 часа"></textarea><button class="send" onclick="sendWhatsApp()">Отправить заявку</button>
+  <textarea id="comment" placeholder="Например: на 2 часа"></textarea><button class="btn btn-send" onclick="sendWhatsApp()">Отправить заявку</button> <button class="btn btn-exit" onclick="window.close()">Выйти</button>
 
-  <div class="note">После отправки заявки администратор получает кнопки "Свободно" / "Занято" в WhatsApp</div>
+  <div class="info">Ответ придёт в WhatsApp</div>  <div class="social">
+    <a href="https://instagram.com/zhlgsv.r" target="_blank">📷 Instagram: @zhlgsv.r</a>
+  </div>  <div class="qr">
+    <div style="margin-bottom:6px;">QR (бронь)-код сайта</div>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://rriinnat19.github.io/arenaclub/" alt="QR (бронь)">
+  </div>
 </div><script>
-  const phone = "77783389306"; // ЗАМЕНИ на номер клуба
+  const phone = "77783389306";
 
   function sendWhatsApp() {
-    let text = `БРОНЬ PS5%0A` +
+    if (!time.value) {
+      alert('Выберите время');
+      return;
+    }
+
+    const text = `ЗАЯВКА PS5%0A` +
       `Время: ${time.value}%0A` +
       `Зал: ${zone.value}%0A` +
       `Оплата: ${pay.value}%0A` +
-      `Комментарий: ${comment.value}%0A` +
-      `%0AПринять или отказать:`;
+      `Комментарий: ${comment.value || '—'}`;
 
     window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
   }
-
-  function accept() {
-    window.open(`https://wa.me/${phone}?text=Бронь ПРИНЯТА ✅`, '_blank');
+</script><!-- Language switcher --><div style="position:fixed;top:10px;right:10px;z-index:999">
+  <button onclick="setLang('ru')">RU</button>
+  <button onclick="setLang('kz')">KZ</button>
+</div><script>
+const texts = {
+  ru: {
+    title: 'Бронирование PS5',
+    submit: 'Подать заявку',
+    exit: 'Выйти',
+    time: 'Время',
+    hall: 'Зал',
+    pay: 'Оплата',
+    comment: 'Комментарий',
+    prices: 'Цены'
+  },
+  kz: {
+    title: 'PS5 брондау',
+    submit: 'Өтінім жіберу',
+    exit: 'Шығу',
+    time: 'Уақыты',
+    hall: 'Зал',
+    pay: 'Төлем',
+    comment: 'Пікір',
+    prices: 'Бағалар'
   }
+};
 
-  function reject() {
-    window.open(`https://wa.me/${phone}?text=Бронь ОТКЛОНЕНА ❌`, '_blank');
-  }
+function setLang(lang){
+  document.querySelectorAll('[data-t]').forEach(el=>{
+    el.innerText = texts[lang][el.dataset.t];
+  });
+}
 </script></body>
 </html>
