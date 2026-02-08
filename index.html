@@ -49,9 +49,11 @@
   <div class="prices">
     <div>🎮 Общий зал — <b>900 ₸ / час</b></div>
     <div>👑 VIP — <b>1500 ₸ / час</b></div>
-  </div>  <h2 data-t="form">Оставить заявку</h2>
-  <label data-t="time">Время игры</label>
-  <input id="time" type="time"><label data-t="hall">Зал</label> <select id="zone"> <option value="Общий зал">Общий зал</option> <option value="VIP">VIP</option> </select>
+  </div>  <h2 data-t="form">Оставить заявку</h2><label data-t="time">Время игры</label> <input id="time" type="time">
+
+<label data-t="hall">Зал</label> <select id="zone"> <option value="Общий зал">Общий зал</option> <option value="VIP">VIP</option> </select>
+
+<label>Смена</label> <select id="shift"> <option value="day">Дневная</option> <option value="night">Ночная</option> </select>
 
 <label data-t="pay">Оплата</label> <select id="pay"> <option value="Kaspi">Kaspi</option> <option value="Наличные">Наличные</option> </select>
 
@@ -70,12 +72,35 @@
     <span data-t="hours_val">каждый день с 14–15 часов до 1–2 ночи (до последнего клиента!)</span>
   </div>
 </div><script>
-  const phone = "77783389306";
+  const dayPhones = ["+77479368830", "+77789828510"];
+  const nightPhone = "+77783389306";
 
   function sendWhatsApp() {
-    if (!time.value) { alert('Выберите время'); return; }
+    const timeInput = time.value;
+    if (!timeInput) { alert('Выберите время'); return; }
 
-    const text = `ЗАЯВКА PS5%0AВремя: ${time.value}%0AЗал: ${zone.value}%0AОплата: ${pay.value}%0AКомментарий: ${comment.value || '—'}`;
+    // Проверка по смене и времени
+    const shiftVal = shift.value;
+    const [hour, minute] = timeInput.split(':').map(Number);
+
+    if (shiftVal === 'day' && (hour < 14 || (hour === 21 && minute > 55) || hour > 21)) {
+      alert('Для дневной смены время должно быть с 14:00 до 21:55');
+      return;
+    }
+    if (shiftVal === 'night' && ((hour < 21 || (hour === 21 && minute < 55)) && hour !== 0 && hour < 3 || hour > 3)) {
+      alert('Для ночной смены время должно быть с 21:55 до 03:00');
+      return;
+    }
+
+    let phone;
+    if (shiftVal === 'day') {
+      phone = dayPhones[Math.floor(Math.random() * dayPhones.length)];
+    } else {
+      phone = nightPhone;
+    }
+
+    const text = `ЗАЯВКА PS5%0AВремя: ${timeInput}%0AЗал: ${zone.value}%0AСмена: ${shiftVal === 'day' ? 'Дневная' : 'Ночная'}%0AОплата: ${pay.value}%0AКомментарий: ${comment.value || '—'}`;
+
     window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
   }
 </script><!-- Language switcher --><div style="position:fixed;top:10px;right:10px;z-index:999">
@@ -83,16 +108,8 @@
   <button onclick="setLang('kz')">KZ</button>
 </div><script>
 const texts = {
-  ru: {
-    title: 'Бронирование PS5', prices: 'Цены', form: 'Оставить заявку', submit: 'Отправить заявку', exit: 'Выйти',
-    time: 'Время игры', hall: 'Зал', pay: 'Оплата', comment: 'Комментарий', qr: 'QR для бронирования PS5',
-    address: 'Адрес:', address_val: 'г. Рудный, ул. Ленина, 20', hours: 'Режим работы:', hours_val: 'каждый день с 14–15 часов до 1–2 ночи (до последнего клиента!)'
-  },
-  kz: {
-    title: 'PS5 брондау', prices: 'Бағалар', form: 'Өтінім қалдыру', submit: 'Өтінім жіберу', exit: 'Шығу',
-    time: 'Ойын уақыты', hall: 'Зал', pay: 'Төлем', comment: 'Пікір', qr: 'PS5 брондауға арналған QR',
-    address: 'Мекенжай:', address_val: 'Рудный қ., Ленин к-сі, 20', hours: 'Жұмыс уақыты:', hours_val: 'күн сайын 14–15-тен 1–2 түнге дейін (соңғы клиентке дейін)'
-  }
+  ru: { title: 'Бронирование PS5', prices: 'Цены', form: 'Оставить заявку', submit: 'Отправить заявку', exit: 'Выйти', time: 'Время игры', hall: 'Зал', pay: 'Оплата', comment: 'Комментарий', qr: 'QR для бронирования PS5', address: 'Адрес:', address_val: 'г. Рудный, ул. Ленина, 20', hours: 'Режим работы:', hours_val: 'каждый день с 14–15 часов до 1–2 ночи (до последнего клиента!)' },
+  kz: { title: 'PS5 брондау', prices: 'Бағалар', form: 'Өтінім қалдыру', submit: 'Өтінім жіберу', exit: 'Шығу', time: 'Ойын уақыты', hall: 'Зал', pay: 'Төлем', comment: 'Пікір', qr: 'PS5 брондауға арналған QR', address: 'Мекенжай:', address_val: 'Рудный қ., Ленин к-сі, 20', hours: 'Жұмыс уақыты:', hours_val: 'күн сайын 14–15-тен 1–2 түнге дейін (соңғы клиентке дейін)' }
 };
 
 function setLang(lang){
@@ -101,4 +118,4 @@ function setLang(lang){
   });
 }
 </script></body>
-        </html>
+</html>
